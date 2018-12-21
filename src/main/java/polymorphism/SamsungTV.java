@@ -2,25 +2,43 @@ package polymorphism;
 
 public class SamsungTV implements TV {
 	
+	private Speaker speaker;
+	private int price;
+	
 	public SamsungTV() {
-		System.out.println("===> SamsungTV °´Ã¼ »ı¼º");
+		System.out.println("===> SamsungTV(1) ê°ì²´ ìƒì„±");
 	}
+	public void setSpeaker(Speaker speaker) {
+		this.speaker = speaker;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	/*public SamsungTV(Speaker speaker) {
+		System.out.println("===> SamsungTV(2) ê°ì²´ ìƒì„±");
+		this.speaker = speaker;
+	}
+	public SamsungTV(Speaker speaker, int price) {
+		System.out.println("===> SamsungTV(3) ê°ì²´ ìƒì„±");
+		this.speaker = speaker;
+		this.price = price;
+	}*/
 	public void initMethod() {
-		System.out.println("°´Ã¼ ÃÊ±âÈ­ ÀÛ¾÷ Ã³¸®");
+		System.out.println("ê°ì²´ ì´ˆê¸°í™” ì‘ì—… ì²˜ë¦¬");
 	}
 	public void destroyMethod() {
-		System.out.println("°´Ã¼ »èÁ¦ Àü¿¡ Ã³¸®ÇÒ ·ÎÁ÷ Ã³¸®");
+		System.out.println("ê°ì²´ ì‚­ì œ ì „ì— ì²˜ë¦¬í•  ë¡œì§ ì²˜ë¦¬");
 	}
 	public void powerOn() {
-		System.out.println("SamsungTV---powerOn");
+		System.out.println("SamsungTV---powerOn (ê°€ê²©: " + price + ")");
 	}
 	public void powerOff() {
 		System.out.println("SamsungTV---powerOff");
 	}
 	public void volumeUp() {
-		System.out.println("SamsungTV---volumeUp");
+		speaker.volumeUp();
 	}
 	public void volumeDown() {
-		System.out.println("SamsungTV---volumeDown");
+		speaker.volumeDown();
 	}
 }
