@@ -14,7 +14,7 @@
 	<h3>${userName } ´Ô È¯¿±ÇÕ´Ï´Ù...<a href="logout.do">Log-out</a></h3>
 	
 	<!-- °Ë»ö ½ÃÀÛ -->
-	<form action="getBoardList.jsp" method="post">
+	<form action="getBoardList.do" method="post">
 		<table border="1" cellpadding="0" cellspacing="0" width="700">
 			<tr>
 				<td align="right">
