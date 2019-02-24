@@ -15,11 +15,13 @@
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
 	<!-- DataSource 설정 -->
+	<context:property-placeholder location="classpath:config/database.properties" />
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="org.h2.Driver" />
-		<property name="url" value="jdbc:h2:tcp://localhost/~/test" />
-		<property name="username" value="sa" />
-		<property name="password" value="" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 	</bean>
 	
 	<!-- Spring JDBC 설정 -->
@@ -31,6 +33,17 @@
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+	
+	<!-- Spring과 Mybatis 연동 설정 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:sql-map-config.xml"></property>
+	</bean>
+	
+	<bean class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSession"></constructor-arg>
+	</bean>
+	
 	
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
@@ -44,38 +57,4 @@
 		<aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
 	</aop:config>
 	
-	<!-- <bean id="log" class="com.springbook.biz.common.LogAdvice"></bean>
-	<bean id="before" class="com.springbook.biz.common.BeforeAdvice"></bean>
-	<bean id="afterReturning" class="com.springbook.biz.common.AfterReturningAdvice"></bean>
-	<bean id="afterThrowing" class="com.springbook.biz.common.AfterThrowingAdvice"></bean>
-	<bean id="after" class="com.springbook.biz.common.AfterAdvice"></bean>
-	<bean id="around" class="com.springbook.biz.common.AroundAdvice"></bean>
-	
-	<aop:config>
-		<aop:pointcut id="allPointcut" expression="execution(* com.springbook.biz..*Impl.*(..))"/>
-		<aop:pointcut id="getPointcut" expression="execution(* com.springbook.biz..*Impl.get*(..))"/>
-		
-		<aop:aspect ref="before">
-		<aop:aspect ref="afterReturning">
-		<aop:aspect ref="afterThrowing">
-		<aop:aspect ref="around">
-			<aop:before pointcut-ref="allPointcut" method="beforeLog"/>
-			<aop:after-returning pointcut-ref="getPointcut" method="afterLog" returning="returnObj"/>
-			<aop:after-throwing pointcut-ref="allPointcut" method="exceptionLog" throwing="exceptObj"/>
-			<aop:around pointcut-ref="allPointcut" method="aroundLog"/>
-		</aop:aspect>
-
-		<aop:aspect ref="after">
-			<aop:after pointcut-ref="allPointcut" method="finallyLog"/>
-		</aop:aspect>
-	</aop:config> -->
-	
-	<!-- <bean id="userService" class="com.springbook.biz.user.impl.UserServiceImpl">
-		<property name="userDAO" ref="userDAO" />
-	</bean>
-	<bean id="userDAO" class="com.springbook.biz.user.impl.UserDAO" /> -->
-
-	<!-- <context:component-scan base-package="polymorphism"></context:component-scan>
-	<bean class="polymorphism.SonySpeaker"></bean> -->
-	<!-- <bean id="tv" class="polymorphism.LgTV"></bean> -->
 </beans>

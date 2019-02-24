@@ -14,7 +14,7 @@ import com.springbook.biz.board.BoardVO;
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired
-	private BoardDAO boardDAO;
+	private BoardDAOMybatis boardDAO;
 //	private LogAdvice log;
 //	private Log4jAdvice log;
 	
