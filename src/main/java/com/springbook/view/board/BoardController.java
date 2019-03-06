@@ -26,15 +26,15 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-/*	@RequestMapping("/dataTransform.do")
+	@RequestMapping("/dataTransform.do")
 	@ResponseBody
 	public List<BoardVO> dataTransform(BoardVO vo) {
 		vo.setSearchCondition("TITLE");
 		vo.setSearchKeyword("");
 		List<BoardVO> boardList = boardService.getBoardList(vo);
-		return boardListVO;
+		return boardList;
 	}
-*/	@RequestMapping("/dataTransform.do")
+	/*@RequestMapping("/dataTransform.do")
 	@ResponseBody
 	public BoardListVO dataTransform(BoardVO vo) {
 		vo.setSearchCondition("TITLE");
@@ -43,7 +43,7 @@ public class BoardController {
 		BoardListVO boardListVO = new BoardListVO();
 		boardListVO.setBoardList(boardList);
 		return boardListVO;
-	}
+	}*/
 	
 	// 글 등록
 	@RequestMapping(value="/insertBoard.do")
