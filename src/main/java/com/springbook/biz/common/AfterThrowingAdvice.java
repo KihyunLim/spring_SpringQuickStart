@@ -25,5 +25,8 @@ public class AfterThrowingAdvice {
 		} else if(exceptObj instanceof Exception) {
 			System.out.println("문제가 발생했습니다.");
 		} 
+		
+		System.out.println(exceptObj.getMessage());
+		exceptObj.printStackTrace();
 	}
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.springbook.biz.board.BoardListVO;
+import com.springbook.biz.board.BoardPage;
 import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
 
@@ -34,7 +35,7 @@ public class BoardController {
 		List<BoardVO> boardList = boardService.getBoardList(vo);
 		return boardListVO;
 	}
-*/	@RequestMapping("/dataTransform.do")
+	@RequestMapping("/dataTransform.do")
 	@ResponseBody
 	public BoardListVO dataTransform(BoardVO vo) {
 		vo.setSearchCondition("TITLE");
@@ -43,7 +44,7 @@ public class BoardController {
 		BoardListVO boardListVO = new BoardListVO();
 		boardListVO.setBoardList(boardList);
 		return boardListVO;
-	}
+	}*/
 	
 	// 글 등록
 	@RequestMapping(value="/insertBoard.do")
@@ -109,7 +110,16 @@ public class BoardController {
 		if(vo.getSearchKeyword() == null) {
 			vo.setSearchKeyword("");
 		}
-		model.addAttribute("boardList", boardService.getBoardList(vo));	// Model 정보 저장
+		
+		BoardPage pageVO = new BoardPage();
+		pageVO.setBoardVO(vo);
+		pageVO.setPage(pageVO.getPageStart());
+		model.addAttribute("boardList", boardService.getBoardList(pageVO));	// Model 정보 저장
+		
+		// 페이징 번호부분 호출 함수
+		// https://blog.hanumoka.net/2018/08/10/spring-20180810-spring-board-paging/
+		// https://rongscodinghistory.tistory.com/7
+		
 		return "getBoardList.jsp";
 	}
 }
