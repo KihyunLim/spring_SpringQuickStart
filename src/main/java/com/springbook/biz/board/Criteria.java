@@ -1,23 +1,15 @@
 package com.springbook.biz.board;
 
-public class BoardPage {
+public class Criteria {
 
-	private BoardVO vo;
 	private int page;
 	private int perPageNum;
 	
-	public BoardVO getBoardVO() {
-		return vo;
-	}
-
-	public void setBoardVO(BoardVO vo) {
-		this.vo = vo;
-	}
-	public BoardPage() {
+	public Criteria() {
 		this.page = 1;
 		this.perPageNum = 3;
 	}
-
+	
 	public int getPage() {
 		return page;
 	}
@@ -33,11 +25,11 @@ public class BoardPage {
 	}
 	
 	public int getPageStart() {
-		return (this.page-1)*perPageNum;
+		return (this.page-1) * this.perPageNum;
 	}
 
 	@Override
 	public String toString() {
-		return "boardPage [page=" + page + ", perPageNum=" + perPageNum + "]";
+		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + "]";
 	}
 }

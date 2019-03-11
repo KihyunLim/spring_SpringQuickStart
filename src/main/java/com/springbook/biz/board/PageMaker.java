@@ -8,7 +8,7 @@ public class PageMaker {
 	private int endPage;
 	private boolean prev;
 	private boolean next;
-	private BoardPage boardPage;
+	private Criteria cri;
 	
 	public int getTotalCount() {
 		return totalCount;
@@ -54,25 +54,25 @@ public class PageMaker {
 		this.next = next;
 	}
 	
-	public BoardPage getBoardPage() {
-		return boardPage;
+	public Criteria getBoardPage() {
+		return cri;
 	}
-	public void setBoardPage(BoardPage boardPage) {
-		this.boardPage = boardPage;
+	public void setBoardPage(Criteria cri) {
+		this.cri = cri;
 	}
 
 	@Override
 	public String toString() {
 		return "PageMaker [totalCount=" + totalCount + ", displayPageNum=" + displayPageNum + ", startPage=" + startPage
-				+ ", endPage=" + endPage + ", prev=" + prev + ", next=" + next + ", boardPage=" + boardPage + "]";
+				+ ", endPage=" + endPage + ", prev=" + prev + ", next=" + next + ", cri=" + cri + "]";
 	}
 	
 	private void calculatePaging() {
-		endPage = (int) (Math.ceil(boardPage.getPage() / (double) displayPageNum) * displayPageNum);
+		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
 		
 		startPage = (endPage - displayPageNum) + 1;
 		
-		int tempEndPage = (int) (Math.ceil(totalCount / (double) boardPage.getPerPageNum()));
+		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
 		
 		if(endPage > tempEndPage) {
 			endPage = tempEndPage;
@@ -80,6 +80,6 @@ public class PageMaker {
 		
 		prev = startPage == 1 ? false : true;
 		
-		next = endPage * boardPage.getPerPageNum() >= totalCount ? false : true;
+		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 	}
 }

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Repository;
 
-import com.springbook.biz.board.BoardPage;
 import com.springbook.biz.board.BoardVO;
 
 @Repository
@@ -42,12 +41,9 @@ public class BoardDAOMybatis {
 	}
 	
 	// 글 목록 조회
-	public List<BoardVO> getBoardList(BoardPage pageBoardVO) {
+	public List<BoardVO> getBoardList(BoardVO vo) {
 		System.out.println("===> mybatis로 getBoardList() 기능 처리");
 		
-//		int a = mybatis.selectOne("BoardDAO.getBoardListCount", vo);
-//		System.out.println(a);
-		
-		return mybatis.selectList("BoardDAO.getBoardList", pageBoardVO);
+		return mybatis.selectList("BoardDAO.getBoardList", vo);
 	}
 }

@@ -42,14 +42,14 @@
 		SELECT * 
 		FROM BOARD
 		WHERE 1 = 1
-		<if test="vo.searchCondition == 'TITLE'">
-			AND TITLE LIKE '%'||#{vo.searchKeyword}||'%'
+		<if test="searchCondition == 'TITLE'">
+			AND TITLE LIKE '%'||#{searchKeyword}||'%'
 		</if>
-		<if test="vo.searchCondition == 'CONTENT'">
-			AND CONTENT LIKE '%'||#{vo.searchKeyword}||'%'
+		<if test="searchCondition == 'CONTENT'">
+			AND CONTENT LIKE '%'||#{searchKeyword}||'%'
 		</if>
 		ORDER BY SEQ DESC
-		LIMIT #{page}, #{perPageNum}
+		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 	
 	<select id="getBoardListCount" resultType="java.lang.Integer">
