@@ -15,8 +15,8 @@
 
 	<insert id="insertBoard" parameterType="board">
 		<![CDATA[
-			INSERT INTO BOARD(SEQ, TITLE, WRITER, CONTENT) 
-			VALUES((SELECT NVL(MAX(SEQ), 0)+1 FROM BOARD),#{title},#{writer},#{content})
+			INSERT INTO BOARD(SEQ, TITLE, WRITER, CONTENT, CNT) 
+			VALUES((SELECT NVL(MAX(SEQ), 0)+1 FROM BOARD),#{title},#{writer},#{content},0)
 		]]>
 	</insert>
 	
@@ -42,11 +42,11 @@
 		SELECT * 
 		FROM BOARD
 		WHERE 1 = 1
-		<if test="searchCondition == 'TITLE'">
-			AND TITLE LIKE '%'||#{searchKeyword}||'%'
+		<if test="vo.searchCondition == 'TITLE'">
+			AND TITLE LIKE '%'||#{vo.searchKeyword}||'%'
 		</if>
-		<if test="searchCondition == 'CONTENT'">
-			AND CONTENT LIKE '%'||#{searchKeyword}||'%'
+		<if test="vo.searchCondition == 'CONTENT'">
+			AND CONTENT LIKE '%'||#{vo.searchKeyword}||'%'
 		</if>
 		ORDER BY SEQ DESC
 		LIMIT #{pageStart}, #{perPageNum}

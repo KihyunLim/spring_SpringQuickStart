@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springbook.biz.board.BoardCriteria;
 import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
 //import com.springbook.biz.common.Log4jAdvice;
@@ -45,8 +46,12 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.getBoard(vo);
 	}
 	
-	public List<BoardVO> getBoardList(BoardVO vo) {
+	public List<BoardVO> getBoardList(BoardCriteria boardCriteria) {
 //		log.printLogging();
-		return boardDAO.getBoardList(vo);
+		return boardDAO.getBoardList(boardCriteria);
+	}
+	
+	public int getBoardListCount(BoardVO vo) {
+		return boardDAO.getBoardListCount(vo);
 	}
 }

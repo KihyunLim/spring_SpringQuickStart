@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.springbook.biz.board.BoardCriteria;
+import com.springbook.biz.board.BoardPageMaker;
 import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
 
@@ -107,9 +109,19 @@ public class BoardController {
 			vo.setSearchKeyword("");
 		}
 		
-		model.addAttribute("boardList", boardService.getBoardList(vo));	// Model 정보 저장
+		// 페이징 목록
+		BoardCriteria boardCriteria = new BoardCriteria(vo);
+		if(vo.getPage() > 0) {
+			boardCriteria.setPage(vo.getPage());
+		}
+		model.addAttribute("boardList", boardService.getBoardList(boardCriteria));	// Model 정보 저장
 		
-		// 페이징 번호부분 호출 함수
+		// 페이징 번호부분
+		BoardPageMaker boardPageMaker = new BoardPageMaker();
+		boardPageMaker.setBoardCriteria(boardCriteria);
+		boardPageMaker.setTotalCount(boardService.getBoardListCount(vo));
+		System.out.println(boardPageMaker.toString());
+		model.addAttribute("pageMaker", boardPageMaker);
 		
 		return "getBoardList.jsp";
 	}

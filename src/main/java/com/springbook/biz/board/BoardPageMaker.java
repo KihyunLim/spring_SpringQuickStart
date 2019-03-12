@@ -1,14 +1,14 @@
 package com.springbook.biz.board;
 
-public class PageMaker {
+public class BoardPageMaker {
 
 	private int totalCount;
-	private int displayPageNum = 10;
+	private int displayPageNum = 3;
 	private int startPage;
 	private int endPage;
 	private boolean prev;
 	private boolean next;
-	private Criteria cri;
+	private BoardCriteria boardCriteria;
 	
 	public int getTotalCount() {
 		return totalCount;
@@ -54,25 +54,19 @@ public class PageMaker {
 		this.next = next;
 	}
 	
-	public Criteria getBoardPage() {
-		return cri;
+	public BoardCriteria getBoardCriteria() {
+		return boardCriteria;
 	}
-	public void setBoardPage(Criteria cri) {
-		this.cri = cri;
+	public void setBoardCriteria(BoardCriteria boardCriteria) {
+		this.boardCriteria = boardCriteria;
 	}
 
-	@Override
-	public String toString() {
-		return "PageMaker [totalCount=" + totalCount + ", displayPageNum=" + displayPageNum + ", startPage=" + startPage
-				+ ", endPage=" + endPage + ", prev=" + prev + ", next=" + next + ", cri=" + cri + "]";
-	}
-	
 	private void calculatePaging() {
-		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
+		endPage = (int) (Math.ceil(boardCriteria.getPage() / (double) displayPageNum) * displayPageNum);
 		
 		startPage = (endPage - displayPageNum) + 1;
 		
-		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
+		int tempEndPage = (int) (Math.ceil(totalCount / (double) boardCriteria.getPerPageNum()));
 		
 		if(endPage > tempEndPage) {
 			endPage = tempEndPage;
@@ -80,6 +74,12 @@ public class PageMaker {
 		
 		prev = startPage == 1 ? false : true;
 		
-		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
+		next = endPage * boardCriteria.getPerPageNum() >= totalCount ? false : true;
+	}
+	
+	@Override
+	public String toString() {
+		return "BoardPageMaker [totalCount=" + totalCount + ", displayPageNum=" + displayPageNum + ", startPage=" + startPage
+				+ ", endPage=" + endPage + ", prev=" + prev + ", next=" + next + ", boardCriteria=" + boardCriteria + "]";
 	}
 }
