@@ -1,5 +1,8 @@
 package com.springbook.biz.board;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class BoardPageMaker {
 
 	private int totalCount;
@@ -75,6 +78,12 @@ public class BoardPageMaker {
 		prev = startPage == 1 ? false : true;
 		
 		next = endPage * boardCriteria.getPerPageNum() >= totalCount ? false : true;
+	}
+	
+	public String makeQuery(int page) {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page).build();
+		
+		return uriComponents.toString();
 	}
 	
 	@Override

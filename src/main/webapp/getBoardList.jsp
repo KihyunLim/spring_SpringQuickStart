@@ -54,7 +54,7 @@
 		<tr>
 			<td colspan="5" align="center">
 				<c:if test="${pageMaker.prev }">
-					<a href="getBoardList.do?page=${pageMaker.startPage }-1">이전</a>
+					<a href="getBoardList.do${pageMaker.makeQuery(pageMaker.startPage - 1) }">이전</a>
 				</c:if>
 			
 				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="page">
@@ -62,7 +62,7 @@
 				</c:forEach>
 				
 				<c:if test="${pageMaker.next }">
-					<a href="getBoardList.do?page=${pageMaker.endPage }+1">다음</a>
+					<a href="getBoardList.do${pageMaker.makeQuery(pageMaker.endPage + 1) }">다음</a>
 				</c:if>
 			</td>
 		</tr>

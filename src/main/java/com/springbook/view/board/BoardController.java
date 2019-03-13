@@ -112,6 +112,7 @@ public class BoardController {
 		// 페이징 목록
 		BoardCriteria boardCriteria = new BoardCriteria(vo);
 		if(vo.getPage() > 0) {
+			System.out.println(">>>>>>>>>>>>>" + vo.getPage());
 			boardCriteria.setPage(vo.getPage());
 		}
 		model.addAttribute("boardList", boardService.getBoardList(boardCriteria));	// Model 정보 저장
