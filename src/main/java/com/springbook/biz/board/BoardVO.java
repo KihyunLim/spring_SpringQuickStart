@@ -1,6 +1,7 @@
 package com.springbook.biz.board;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -54,8 +55,10 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegDate() {
-		return regDate;
+	public String getRegDate() {
+		SimpleDateFormat simpleRegDate = new SimpleDateFormat("yyyy-MM-dd");
+		
+		return simpleRegDate.format(regDate);
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
