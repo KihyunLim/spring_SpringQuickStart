@@ -17,7 +17,11 @@ public class BoardCriteria {
 		return page;
 	}
 	public void setPage(int page) {
-		this.page = page;
+		if(page > 0) {
+			this.page = page;
+		} else {
+			this.page = 1;
+		}
 	}
 
 	public int getPerPageNum() {

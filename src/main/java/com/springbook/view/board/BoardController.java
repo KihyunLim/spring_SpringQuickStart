@@ -108,19 +108,19 @@ public class BoardController {
 		if(vo.getSearchKeyword() == null) {
 			vo.setSearchKeyword("");
 		}
-		
+		System.out.println(vo.toString());
 		// 페이징 목록
 		BoardCriteria boardCriteria = new BoardCriteria(vo);
 		if(vo.getPage() > 0) {
 			boardCriteria.setPage(vo.getPage());
 		}
+		model.addAttribute("curPage", boardCriteria.getPage());
 		model.addAttribute("boardList", boardService.getBoardList(boardCriteria));	// Model 정보 저장
 		
 		// 페이징 번호부분
 		BoardPageMaker boardPageMaker = new BoardPageMaker();
 		boardPageMaker.setBoardCriteria(boardCriteria);
 		boardPageMaker.setTotalCount(boardService.getBoardListCount(vo));
-		System.out.println(boardPageMaker.toString());
 		model.addAttribute("pageMaker", boardPageMaker);
 		
 		return "getBoardList.jsp";
