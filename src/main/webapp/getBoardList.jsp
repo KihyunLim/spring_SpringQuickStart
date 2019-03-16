@@ -20,11 +20,31 @@
 			<tr>
 				<td align="right">
 					<select name="searchCondition">
-					<c:forEach items="${conditionMap }" var="option">
+						<c:if test="${searchInfo.searchCondition eq 'CONTENT' }">
+						<option value="TITLE">제목</option>
+						<option value="CONTENT" selected>내용</option>
+						</c:if>
+						<c:if test="${searchInfo.searchCondition ne 'CONTENT' }">
+						<option value="TITLE" selected>제목</option>
+						<option value="CONTENT">내용</option>
+						</c:if>
+					<!-- 굳이 동적으로 표현할 필요없어보여 주석 처리 -->
+					<%-- <c:forEach items="${conditionMap }" var="option">
 						<option value="${option.value }">${option.key }</option>
-					</c:forEach>
+					</c:forEach> --%>
 					</select>
-					<input name="searchKeyword" type="text" />
+					
+					<c:choose>
+						<c:when test="${searchInfo.searchKeyword ne '' }">
+						<input name="searchKeyword" type="text" value="${searchInfo.searchKeyword }" />
+						</c:when>
+						
+						<c:otherwise>
+						<input name="searchKeyword" type="text" />
+						</c:otherwise>
+					</c:choose>
+					
+					<!-- <input name="searchKeyword" type="text" /> -->
 					<input type="submit" value="<spring:message code="message.board.list.search.condition.btn"/>" />
 				</td>
 			</tr>
@@ -44,7 +64,7 @@
 		<c:forEach items="${boardList }" var="board">
 		<tr>
 			<td>${board.seq }</td>
-			<td align="left"><a href="getBoard.do?seq=${board.seq }&page=${curPage}">${board.title }</a></td>
+			<td align="left"><a href="getBoard.do?seq=${board.seq }&page=${searchInfo.curPage}&searchCondition=${searchInfo.searchCondition}&searchKeyword=${searchInfo.searchKeyword}">${board.title }</a></td>
 			<td>${board.writer }</td>
 			<td>${board.regDate }</td>
 			<td>${board.cnt }</td>
@@ -58,7 +78,12 @@
 				</c:if>
 			
 				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="page">
-				<a href="getBoardList.do?page=${page }">[${page }]</a>
+				<c:if test="${page eq searchInfo.curPage }">
+				[${page }]
+				</c:if>
+				<c:if test="${page ne searchInfo.curPage }">
+				<a href="getBoardList.do?page=${page }&searchCondition=${searchInfo.searchCondition}&searchKeyword=${searchInfo.searchKeyword}">[${page }]</a>
+				</c:if>
 				</c:forEach>
 				
 				<c:if test="${pageMaker.next }">

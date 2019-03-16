@@ -85,18 +85,19 @@ public class BoardController {
 	@RequestMapping("/getBoard.do")
 	public String getBoard(BoardVO vo, Model model) {
 //		System.out.println("글 상세조회 처리");
+		model.addAttribute("searchInfo", setSearchInfo(vo.getPage(), vo.getSearchCondition(), vo.getSearchKeyword()));
 		model.addAttribute("board", boardService.getBoard(vo));
 		return "getBoard.jsp";
 	}
 	
-	// 검색 조건 목록 설정
-	@ModelAttribute("conditionMap")
+	// 검색 조건 목록 설정 (당장 쓸일 없어 보이므로 주석 처리)
+	/*@ModelAttribute("conditionMap")
 	public Map<String, String> searchConditionMap() {
 		Map<String, String> conditionMap = new HashMap<String, String>();
 		conditionMap.put("제목", "TITLE");
 		conditionMap.put("내용", "CONTENT");
 		return conditionMap;
-	}
+	}*/
 	
 	// 글 목록 검색
 	@RequestMapping("/getBoardList.do")
@@ -111,10 +112,12 @@ public class BoardController {
 		System.out.println(vo.toString());
 		// 페이징 목록
 		BoardCriteria boardCriteria = new BoardCriteria(vo);
+		
 		if(vo.getPage() > 0) {
 			boardCriteria.setPage(vo.getPage());
 		}
-		model.addAttribute("curPage", boardCriteria.getPage());
+		
+		model.addAttribute("searchInfo", setSearchInfo(boardCriteria.getPage(), vo.getSearchCondition(), vo.getSearchKeyword()));
 		model.addAttribute("boardList", boardService.getBoardList(boardCriteria));	// Model 정보 저장
 		
 		// 페이징 번호부분
@@ -124,5 +127,15 @@ public class BoardController {
 		model.addAttribute("pageMaker", boardPageMaker);
 		
 		return "getBoardList.jsp";
+	}
+	
+	// 검색 조건 및 페이지 설정
+	public Map<String, String> setSearchInfo(int page, String condition, String keyword) {
+		Map<String, String> searchInfo = new HashMap<String, String>();
+		searchInfo.put("curPage", Integer.toString(page));
+		searchInfo.put("searchCondition", condition);
+		searchInfo.put("searchKeyword", keyword);
+		
+		return searchInfo;
 	}
 }
