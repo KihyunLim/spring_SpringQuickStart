@@ -41,6 +41,10 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.deleteBoard(vo);
 	}
 	
+	public void updateBoardCnt(BoardVO vo) {
+		boardDAO.updateBoardCnt(vo);
+	}
+	
 	public BoardVO getBoard(BoardVO vo) {
 //		log.printLogging();
 		return boardDAO.getBoard(vo);

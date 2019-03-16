@@ -32,6 +32,12 @@
 		]]>
 	</delete>
 	
+	<update id="updateBoardCnt">
+		<![CDATA[
+			UPDATE BOARD SET CNT=CNT+1 WHERE SEQ=#{seq}
+		]]>
+	</update>
+	
 	<select id="getBoard" resultType="board">
 		<![CDATA[
 			SELECT * FROM BOARD WHERE SEQ=#{seq}

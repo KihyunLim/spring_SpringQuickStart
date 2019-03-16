@@ -35,6 +35,12 @@ public class BoardDAOMybatis {
 		mybatis.delete("BoardDAO.deleteBoard", vo);
 	}
 	
+	// 조회 수 1 증가
+	public void updateBoardCnt(BoardVO vo) {
+		System.out.println("===> mybatis로 updateBoardCnt() 기능 처리");
+		mybatis.update("BoardDAO.updateBoardCnt", vo);
+	}
+	
 	// 글 상세 조회
 	public BoardVO getBoard(BoardVO vo) {
 		System.out.println("===> mybatis로 getBoard() 기능 처리");

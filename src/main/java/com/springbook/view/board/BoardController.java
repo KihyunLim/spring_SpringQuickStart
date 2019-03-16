@@ -85,6 +85,8 @@ public class BoardController {
 	@RequestMapping("/getBoard.do")
 	public String getBoard(BoardVO vo, Model model) {
 //		System.out.println("글 상세조회 처리");
+		boardService.updateBoardCnt(vo);
+		
 		model.addAttribute("searchInfo", setSearchInfo(vo.getPage(), vo.getSearchCondition(), vo.getSearchKeyword()));
 		model.addAttribute("board", boardService.getBoard(vo));
 		return "getBoard.jsp";

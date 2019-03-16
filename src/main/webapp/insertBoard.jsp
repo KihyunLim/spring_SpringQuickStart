@@ -22,7 +22,7 @@
 			<tr>
 				<td bgcolor="orange">ÀÛ¼ºÀÚ</td>
 				<td align="left">
-					<input name="writer" type="text" size="10" />
+					<input name="writer" type="text" size="10" value=${userId } readonly />
 				</td>
 			</tr>
 			<tr>
