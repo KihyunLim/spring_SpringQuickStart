@@ -10,6 +10,18 @@
 	<context:component-scan base-package="com.springbook.view"></context:component-scan>
 	<mvc:annotation-driven></mvc:annotation-driven>
 
+	<!-- 인터셉터 설정 (로그인 체크) -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.do"></mvc:mapping>
+			<!-- <mvc:mapping path="/getBoard.do"></mvc:mapping> -->			<!-- 특정페이지만 잡을때 -->
+			<mvc:exclude-mapping path="/login.do"></mvc:exclude-mapping>
+			<mvc:exclude-mapping path="/getBoardList.do"></mvc:exclude-mapping>
+			<mvc:exclude-mapping path="/getBoard.do"></mvc:exclude-mapping>
+			<bean class="com.springbook.biz.common.AuthenticationInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 	<!-- 파일 업로드 설정 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
