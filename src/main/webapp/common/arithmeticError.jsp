@@ -1,20 +1,20 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page isErrorPage="true" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>¿¡·¯ È­¸é</title>
+<title>ì—ëŸ¬ í™”ë©´</title>
 </head>
 <body bgcolor="#ffffff" text="#000000">
 
-<!-- Å¸ÀÌÆ² ½ÃÀÛ -->
+<!-- íƒ€ì´í‹€ ì‹œì‘ -->
 <table width="100%" border="1" cellspacing="0" cellpadding="0">
 	<tr>
-		<td align="center" bgcolor="orange"><b>arithmeticError ¿¡·¯ È­¸éÀÔ´Ï´Ù.</b></td>
+		<td align="center" bgcolor="orange"><b>arithmeticError ì—ëŸ¬ í™”ë©´ì…ë‹ˆë‹¤.</b></td>
 	</tr>
 </table>
 <br>
-<!-- ¿¡·¯ ¸Ş½ÃÁö -->
+<!-- ì—ëŸ¬ ë©”ì‹œì§€ -->
 <table width="100%" border="1" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td align="center"><br><br><br><br><br>Message : ${exception.message }<br><br><br><br><br></td>

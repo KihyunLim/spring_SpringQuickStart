@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,15 +26,18 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-/*	@RequestMapping("/dataTransform.do")
+	@RequestMapping("/dataTransform.do")
 	@ResponseBody
-	public List<BoardVO> dataTransform(BoardVO vo) {
+	public String dataTransform(BoardVO vo) {
+		return "ㅎㅇㅎㅇ asdfasd";
+	}
+	/*public List<BoardVO> dataTransform(BoardVO vo) {
 		vo.setSearchCondition("TITLE");
 		vo.setSearchKeyword("");
 		List<BoardVO> boardList = boardService.getBoardList(vo);
 		return boardListVO;
-	}
-	@RequestMapping("/dataTransform.do")
+	}*/
+/*	@RequestMapping("/dataTransform.do")
 	@ResponseBody
 	public BoardListVO dataTransform(BoardVO vo) {
 		vo.setSearchCondition("TITLE");

@@ -1,11 +1,13 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="<c:url value="/resources/lib/jquery-3.3.1.js"/>"></script>
+
 <title><spring:message code="message.board.list.mainTitle"/></title>
 </head>
 <body>
@@ -14,21 +16,21 @@
 	<h1><spring:message code="message.board.list.mainTitle"/></h1>
 	<h3>${userName }<spring:message code="message.board.list.welcomeMsg"/><a href="logout.do">Log-out</a></h3>
 	
-	<!-- ∞Àªˆ Ω√¿€ -->
+	<!-- Í≤ÄÏÉâ ÏãúÏûë -->
 	<form action="getBoardList.do" method="post">
 		<table border="1" cellpadding="0" cellspacing="0" width="700">
 			<tr>
 				<td align="right">
 					<select name="searchCondition">
 						<c:if test="${searchInfo.searchCondition eq 'CONTENT' }">
-						<option value="TITLE">¡¶∏Ò</option>
-						<option value="CONTENT" selected>≥ªøÎ</option>
+						<option value="TITLE">Ï†úÎ™©</option>
+						<option value="CONTENT" selected>ÎÇ¥Ïö©</option>
 						</c:if>
 						<c:if test="${searchInfo.searchCondition ne 'CONTENT' }">
-						<option value="TITLE" selected>¡¶∏Ò</option>
-						<option value="CONTENT">≥ªøÎ</option>
+						<option value="TITLE" selected>Ï†úÎ™©</option>
+						<option value="CONTENT">ÎÇ¥Ïö©</option>
 						</c:if>
-					<!-- ±ª¿Ã µø¿˚¿∏∑Œ «•«ˆ«“ « ø‰æ¯æÓ∫∏ø© ¡÷ºÆ √≥∏Æ -->
+					<!-- Íµ≥Ïù¥ ÎèôÏ†ÅÏúºÎ°ú ÌëúÌòÑÌï† ÌïÑÏöîÏóÜÏñ¥Î≥¥Ïó¨ Ï£ºÏÑù Ï≤òÎ¶¨ -->
 					<%-- <c:forEach items="${conditionMap }" var="option">
 						<option value="${option.value }">${option.key }</option>
 					</c:forEach> --%>
@@ -36,21 +38,21 @@
 					
 					<c:choose>
 						<c:when test="${searchInfo.searchKeyword ne '' }">
-						<input name="searchKeyword" type="text" value="${searchInfo.searchKeyword }" />
+						<input name="searchKeyword" id="asd" type="text" value="${searchInfo.searchKeyword }" />
 						</c:when>
 						
 						<c:otherwise>
-						<input name="searchKeyword" type="text" />
+						<input name="searchKeyword" id="asd" type="text" />
 						</c:otherwise>
 					</c:choose>
 					
 					<!-- <input name="searchKeyword" type="text" /> -->
-					<input type="submit" value="<spring:message code="message.board.list.search.condition.btn"/>" />
+					<input type="submit" id="btnSearch" value="<spring:message code="message.board.list.search.condition.btn"/>" />
 				</td>
 			</tr>
 		</table>
 	</form>
-	<!-- ∞Àªˆ ¡æ∑· -->
+	<!-- Í≤ÄÏÉâ Ï¢ÖÎ£å -->
 	
 	<table border="1" cellpadding="0" cellspacing="0" width="700">
 		<tr>
@@ -74,7 +76,7 @@
 		<tr>
 			<td colspan="5" align="center">
 				<c:if test="${pageMaker.prev }">
-					<a href="getBoardList.do${pageMaker.makeQuery(pageMaker.startPage - 1) }">¿Ã¿¸</a>
+					<a href="getBoardList.do${pageMaker.makeQuery(pageMaker.startPage - 1) }">Ïù¥Ï†Ñ</a>
 				</c:if>
 			
 				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="page">
@@ -87,7 +89,7 @@
 				</c:forEach>
 				
 				<c:if test="${pageMaker.next }">
-					<a href="getBoardList.do${pageMaker.makeQuery(pageMaker.endPage + 1) }">¥Ÿ¿Ω</a>
+					<a href="getBoardList.do${pageMaker.makeQuery(pageMaker.endPage + 1) }">Îã§Ïùå</a>
 				</c:if>
 			</td>
 		</tr>
@@ -95,6 +97,16 @@
 	<br>
 	<a href="insertBoard.jsp"><spring:message code="message.board.list.link.insertBoard"/></a>
 </center>
+
+
+<script>
+	console.log("HI");
+	$("#btnSearch").click(function(e){
+		e.preventDefault();
+
+		alert($("#asd").val());
+	});
+</script>
 
 </body>
 </html>
